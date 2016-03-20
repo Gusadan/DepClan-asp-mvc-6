@@ -49,27 +49,27 @@
                 <ul class="nav navbar-nav navbar-left nav-links">
                     <li class="hidden"><a href="#page-top"></a></li>
                     <li><a asp-controller="Home" asp-action="Index">Home</a></li>
-                    <li class="page-scroll"><a href="#about">Gallery</a></li>
-                    <li class="page-scroll"><a href="#about">3rd Page</a></li>
-                    <li class="page-scroll"><a href="#about">About</a></li>
-                    <li class="page-scroll"><a href="#contact">Contact</a></li>
-                    <li><a asp-controller="Account" asp-action="Login">Login</a></li>
+                    <li ><a href="#about">Gallery</a></li>
+                    <li ><a href="#about">3rd Page</a></li>
+                    <li ><a href="#about">About</a></li>
+                    <li ><a href="#contact">Contact</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a asp-controller="Account" asp-action="Login">Login</a></li>
-                    <li><a asp-controller="Account" asp-action="Register">Register</a></li>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <li>Welcome</li>
+                        <li><a asp-controller="Account" asp-action="Logout">Logout</a></li>
+                    }
+
+                    else
+                    {
+                        <li><a asp-controller="Account" asp-action="Login">Login</a></li>
+                        <li><a asp-controller="Account" asp-action="Register">Register</a></li>
+                    }
                 </ul>
             </div><!--/.navbar-collapse -->
         </div>
     </nav>
-    <!--<div class="navbar-collapse collapse">
-        <ul class="nav navbar-nav">
-            <li><a asp-controller="Home" asp-action="Index">Home</a></li>
-            <li><a asp-controller="Person" asp-action="Index">Person</a></li>
-            <li><a asp-controller="Account" asp-action="Register">Register</a></li>
-            <li><a asp-controller="Account" asp-action="Login">Login</a></li>
-        </ul>
-    </div>-->
 
     @RenderBody()
 
@@ -194,4 +194,5 @@
         ga('create', 'UA-XXXXX-X', 'auto'); ga('send', 'pageview');
     </script>
 </body>
+
 </html>

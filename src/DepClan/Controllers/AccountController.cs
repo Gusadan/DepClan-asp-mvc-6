@@ -87,11 +87,14 @@ namespace DepClan.Controllers
         //7
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> LogOff()
+        public async Task<IActionResult> Logout()
         {
-            await _loginManager.SignOutAsync();
+            if (User.Identity.IsAuthenticated)
+            {
+                await _loginManager.SignOutAsync();
+            }
 
-            return RedirectToAction(nameof(HomeController.Index), "Home");
+            return RedirectToAction("Index", "Home");
         }
         //8
         private IActionResult RedirectToReturnUrl(string returnUrl)
