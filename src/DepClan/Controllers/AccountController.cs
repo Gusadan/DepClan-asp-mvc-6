@@ -41,7 +41,8 @@ namespace DepClan.Controllers
                 var user = new AppUser
                 {
                     UserName = model.Email,
-                    Email = model.Email
+                    Email = model.Email,
+                    Admin = false
                 };
                 var result = await _securityManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)

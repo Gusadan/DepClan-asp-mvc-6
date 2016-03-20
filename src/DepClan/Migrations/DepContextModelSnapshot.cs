@@ -22,6 +22,8 @@ namespace DepClan.Migrations
 
                     b.Property<int>("AccessFailedCount");
 
+                    b.Property<bool>("Admin");
+
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken();
 

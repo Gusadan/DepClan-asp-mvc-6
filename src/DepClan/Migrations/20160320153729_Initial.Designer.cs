@@ -8,7 +8,7 @@ using DepClan.Models;
 namespace DepClan.Migrations
 {
     [DbContext(typeof(DepContext))]
-    [Migration("20160312173247_Initial")]
+    [Migration("20160320153729_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -22,6 +22,8 @@ namespace DepClan.Migrations
                     b.Property<string>("Id");
 
                     b.Property<int>("AccessFailedCount");
+
+                    b.Property<bool>("Admin");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken();

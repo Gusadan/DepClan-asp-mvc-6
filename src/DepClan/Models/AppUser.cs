@@ -8,6 +8,6 @@ namespace DepClan.Models
 {
     public class AppUser: IdentityUser
     {
-
+        public bool Admin { get; set; }
     }
 }
