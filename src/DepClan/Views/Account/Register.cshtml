@@ -3,38 +3,136 @@
     Layout = "_Layout";
     ViewData["Title"] = "Register";
 }
+@section Scripts{
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+}
 
 <div class="container">
-    <h2>@ViewData["Title"].</h2>
-    <form asp-controller="Account" asp-action="Register" class="form-horizontal" role="form">
-        <h4>Create a new account.</h4>
-        <hr />
-        <div asp-validation-summary="ValidationSummary.All" class="text-danger"></div>
-        <div class="form-group">
-            <label asp-for="Email" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <input asp-for="Email" class="form-control" />
-                <span asp-validation-for="Email" class="text-danger"></span>
+    <div class="row">
+        @{/*
+        <form asp-controller="Account" asp-action="Register" class="form-horizontal" role="form">
+            <h4>Create a new account.</h4>
+            <hr />
+            <div asp-validation-summary="ValidationSummary.All" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="FirstName" class="col-md-2 control-label">First name</label>
+                <div class="col-md-3">
+                    <input asp-for="FirstName" class="form-control" />
+                    <span asp-validation-for="FirstName" class="text-danger"></span>
+                </div>
             </div>
-        </div>
-        <div class="form-group">
-            <label asp-for="Password" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <input asp-for="Password" class="form-control" />
-                <span asp-validation-for="Password" class="text-danger"></span>
+            <div class="form-group">
+                <label asp-for="MiddleName" class="col-md-2 control-label">Middle name</label>
+                <div class="col-md-3">
+                    <input asp-for="MiddleName" class="form-control" />
+                    <span asp-validation-for="MiddleName" class="text-danger"></span>
+                </div>
             </div>
-        </div>
-        <div class="form-group">
-            <label asp-for="ConfirmPassword" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <input asp-for="ConfirmPassword" class="form-control" />
-                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+            <div class="form-group">
+                <label asp-for="LastName" class="col-md-2 control-label">Last name</label>
+                <div class="col-md-3">
+                    <input asp-for="LastName" class="form-control" />
+                    <span asp-validation-for="LastName" class="text-danger"></span>
+                </div>
             </div>
-        </div>
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <button type="submit" class="btn btn-default">Register</button>
+            <div class="form-group">
+                <label asp-for="Email" class="col-md-2 control-label"></label>
+                <div class="col-md-3">
+                    <input asp-for="Email" class="form-control" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
             </div>
+            <div class="form-group">
+                <label asp-for="Password" class="col-md-2 control-label"></label>
+                <div class="col-md-3">
+                    <input asp-for="Password" class="form-control" />
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="ConfirmPassword" class="col-md-2 control-label"></label>
+                <div class="col-md-3">
+                    <input asp-for="ConfirmPassword" class="form-control" />
+                    <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <button type="submit" class="btn btn-default">Register</button>
+                </div>
+            </div>
+        </form>*/
+        }
+        @{
+//TODO: To add username, birthdate
+        }
+        <div class="col-md-8 col-md-offset-2">
+            <div><h1 class="text-center">Sign up!</h1></div>
+            <div asp-validation-summary="ValidationSummary.All" class="text-danger"></div>
+            <form asp-controller="Account" asp-action="Register" role="form">
+                <div class="row">
+                    <div class="col-md-4">
+                        <fieldset class="form-group">
+                            <label asp-for="FirstName" class="sr-only">First name</label>
+                            <input asp-for="FirstName" class="form-control" placeholder="First name">
+                            <span asp-validation-for="FirstName" class="text-danger"></span>
+                        </fieldset>
+                    </div>
+                    <div class="col-md-4">
+                        <fieldset class="form-group">
+                            <label asp-for="MiddleName" class="sr-only">Middle name</label>
+                            <input asp-for="MiddleName" class="form-control" placeholder="Middle name">
+                        </fieldset>
+                    </div>
+                    <div class="col-md-4">
+                        <fieldset class="form-group">
+                            <label asp-for="LastName" class="sr-only">Last name</label>
+                            <input asp-for="LastName" class="form-control" placeholder="Last name">
+                            <span asp-validation-for="LastName" class="text-danger"></span>
+                        </fieldset>
+                    </div>
+                </div>
+                @{
+//TODO: radio buttons no functionality yet.
+                }
+                <div class="row">
+                    <label class="col-md-12">Gender</label>
+                    <fieldset class="form-group col-md-12">
+                        <label class="radio-inline"><input type="radio" name="optradio" />Male</label>
+                        <label class="radio-inline"><input type="radio" name="optradio" />Female</label>
+                        <label class="radio-inline"><input type="radio" name="optradio" />Not Specified</label>
+                    </fieldset>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <fieldset class="form-group">
+                            <label asp-for="Email" class="sr-only">Email address</label>
+                            <input asp-for="Email" type="email" class="form-control" placeholder="Email address" />
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </fieldset>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <fieldset class="form-group">
+                            <label asp-for="Password" class="sr-only">Password</label>
+                            <input asp-for="Password" type="password" class="form-control" placeholder="Password">
+                            <span asp-validation-for="Password" class="text-danger"></span>
+                        </fieldset>
+                    </div>
+                    <div class="col-md-6">
+                        <fieldset class="form-group">
+                            <label asp-for="ConfirmPassword" class="sr-only">Confirm password</label>
+                            <input asp-for="ConfirmPassword" type="password" class="form-control" placeholder="Confirm password">
+                            <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                        </fieldset>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-default pull-right">Sign up</button>
+            </form>
         </div>
-    </form>
-</div>
+    </div>
+</div><!--container end-->

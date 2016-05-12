@@ -1,6 +1,6 @@
 ﻿@model DepClan.Models.Login
-@{
-}
+@using DepClan.Models;
+@using System.Security.Claims
 
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
@@ -49,27 +49,43 @@
                 <ul class="nav navbar-nav navbar-left nav-links">
                     <li class="hidden"><a href="#page-top"></a></li>
                     <li><a asp-controller="Home" asp-action="Index">Home</a></li>
-                    <li ><a href="#about">Gallery</a></li>
-                    <li ><a href="#about">3rd Page</a></li>
-                    <li ><a href="#about">About</a></li>
-                    <li ><a href="#contact">Contact</a></li>
+                    <li><a href="#about">Gallery</a></li>
+                    <li><a href="#about">3rd Page</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a asp-controller="Contact" asp-action="Index">Contact</a></li>
                 </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    @if (User.Identity.IsAuthenticated)
-                    {
-                        <li>Welcome</li>
-                        <li><a asp-controller="Account" asp-action="Logout">Logout</a></li>
-                    }
-
-                    else
-                    {
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <form asp-controller="Account" asp-action="LogOff" method="post" class="navbar-right">
+                        <ul class="nav navbar-nav navbar-right">
+                            <li>
+                                <a asp-controller="Manage" asp-action="Index" title="Manage">Hello @User.GetUserName()!</a>
+                            </li>
+                            <li>
+                                <button type="submit" class="btn btn-link navbar-btn navbar-link">Log off</button>
+                            </li>
+                        </ul>
+                    </form>
+                }
+                else
+                {
+                    <ul class="nav navbar-nav navbar-right">
                         <li><a asp-controller="Account" asp-action="Login">Login</a></li>
                         <li><a asp-controller="Account" asp-action="Register">Register</a></li>
-                    }
-                </ul>
+                    </ul>
+                }
             </div><!--/.navbar-collapse -->
         </div>
     </nav>
+    @if (User.Identity.IsAuthenticated)
+    {
+        <h1>Logged In</h1>
+    }
+    else
+    {
+        <h1>Logged Out</h1>
+
+    }
 
     @RenderBody()
 
@@ -183,6 +199,9 @@
     </script>
     TO SKIP FOR LATER 001 END-->
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
+
+    @RenderSection("Scripts", false)
+
     <script>
         (function (b, o, i, l, e, r) {
             b.GoogleAnalyticsObject = l; b[l] || (b[l] =

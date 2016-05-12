@@ -3,33 +3,31 @@ using Microsoft.AspNet.Mvc;
 using Microsoft.AspNet.Authorization;
 using DepClan.Models;
 using Microsoft.AspNet.Identity;
-
-
+using Microsoft.AspNet.Identity.EntityFramework;
+using System;
+using System.Security.Claims;
+using System.Collections.Generic;
 
 namespace DepClan.Controllers
 {
 
     public class AccountController : Controller
     {
-        //1
-        private readonly UserManager<AppUser> _securityManager;
-        private readonly SignInManager<AppUser> _loginManager;
-        //2
-        public AccountController(UserManager<AppUser> secMgr, SignInManager<AppUser> loginManager)
+        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly SignInManager<ApplicationUser> _signInManager;
+        
+        public AccountController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager)
         {
-            _securityManager = secMgr;
-            _loginManager = loginManager;
+            _userManager = userManager;
+            _signInManager = signInManager;
         }
-
-        //3
+        
         [HttpGet]
         [AllowAnonymous]
         public IActionResult Register()
         {
             return View();
         }
-
-        //4
 
         [HttpPost]
         [AllowAnonymous]
@@ -38,16 +36,19 @@ namespace DepClan.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new AppUser
+                var user = new ApplicationUser
                 {
+                    FirstName = model.FirstName,
+                    MiddleName = model.MiddleName,
+                    LastName = model.LastName,
                     UserName = model.Email,
                     Email = model.Email,
                     Admin = false
                 };
-                var result = await _securityManager.CreateAsync(user, model.Password);
+                var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    await _loginManager.SignInAsync(user, isPersistent: false);
+                    await _signInManager.SignInAsync(user, isPersistent: false);
                     return RedirectToAction(nameof(HomeController.Index), "Home");
                 }
             }
@@ -55,7 +56,6 @@ namespace DepClan.Controllers
             return View(model);
         }
 
-        //5
         [HttpGet]
         [AllowAnonymous]
         public IActionResult Login(string returnUrl = null)
@@ -63,8 +63,7 @@ namespace DepClan.Controllers
             ViewData["ReturnUrl"] = returnUrl;
             return View();
         }
-
-        //6
+        
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -73,30 +72,41 @@ namespace DepClan.Controllers
             ViewData["ReturnUrl"] = returnUrl;
             if (ModelState.IsValid)
             {
-                var result = await _loginManager.PasswordSignInAsync(model.Email, model.Password, false, lockoutOnFailure: false);
+                var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, false, lockoutOnFailure: false);
                 if (result.Succeeded)
                 {
+                    //var userId = User.();
+                    //ApplicationUser user = await _securityManager.FindByIdAsync(userId);
+                    //if (User.Identity.IsAuthenticated)
+                    //{
+                    //while (true)
+                    //{
+                        if (User.IsSignedIn())
+                        {
+                            var user = await _userManager.FindByIdAsync(User.GetUserId());
+                        ViewBag.fname = user.LastName;
+                    }
+                    //}
+                    
+                    //var claims = new List<Claim>();
+                    //}
                     return RedirectToReturnUrl(returnUrl);
                 }
             }
 
-
             return View(model);
         }
 
-        //7
+        /** ISSUE: won't work if [HttpPost] and [ValidateAntiForgeryToken] is applied **/
+        /** TODO: fix the issue **/
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Logout()
+        //[ValidateAntiForgeryToken]
+        public async Task<IActionResult> LogOff()
         {
-            if (User.Identity.IsAuthenticated)
-            {
-                await _loginManager.SignOutAsync();
-            }
-
-            return RedirectToAction("Index", "Home");
+            await _signInManager.SignOutAsync();
+            return RedirectToAction(nameof(HomeController.Index), "Home");
         }
-        //8
+
         private IActionResult RedirectToReturnUrl(string returnUrl)
         {
             if (Url.IsLocalUrl(returnUrl))

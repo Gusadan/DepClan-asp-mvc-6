@@ -6,8 +6,14 @@ using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace DepClan.Models
 {
-    public class AppUser: IdentityUser
+    public class ApplicationUser: IdentityUser
     {
         public bool Admin { get; set; }
+
+        public string FirstName { get; set; }
+
+        public string MiddleName { get; set; }
+
+        public string LastName { get; set; }
     }
 }

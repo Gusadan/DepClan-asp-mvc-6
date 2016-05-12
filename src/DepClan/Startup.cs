@@ -11,6 +11,7 @@ using Microsoft.Data.Entity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.PlatformAbstractions;
 using Microsoft.AspNet.Identity.EntityFramework;
+using DepClan.Services;
 
 namespace DepClan
 {
@@ -34,14 +35,21 @@ namespace DepClan
         {
             services.AddEntityFramework()
               .AddSqlServer()
-              .AddDbContext<DepContext>(options =>
-                  options.UseSqlServer(Configuration["Data:DefaultConnection:ConnectionString"]));
+              .AddDbContext<DepContext>(options => options.UseSqlServer(Configuration["Data:DefaultConnection:ConnectionString"]));
 
-            services.AddIdentity<AppUser, IdentityRole>()
+            services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<DepContext>()
                 .AddDefaultTokenProviders();
 
             services.AddMvc();
+
+            //TODO: create MailService
+#if DEBUG
+            services.AddScoped<IMailService, DebugMailService>();
+#else
+            
+            services.AddScoped<IMailService, *>();
+#endif
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

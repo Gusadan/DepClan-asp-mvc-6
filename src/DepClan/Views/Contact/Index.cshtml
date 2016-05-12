@@ -1,0 +1,71 @@
+﻿@model DepClan.Models.Query
+@section Scripts{
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+}
+<div class="container">
+    <!-- Example row of columns -->
+    <div class="row">
+        <div class="col-lg-12">
+            @if (ViewBag.Message != null)
+            {
+                <div><p>@ViewBag.Message</p></div>
+                <div><p>Click <a asp-controller="Home" asp-action="Index">here</a> to go back to home page.</p></div><hr />
+            }
+
+            <h3>Contact Information</h3>
+
+            <style>
+                .reverseEmail {
+                    unicode-bidi: bidi-override;
+                    direction: rtl;
+                }
+            </style>
+            <p>My name is Hans and I am the author of this site. You can email me directly at <span class="reverseEmail">moc.liamg@newosnagsnahj</span> or you can complete the form below.</p>
+
+            <section>
+                @{
+                    //TODO: style validation messages.(overlapping in mobile view)
+                }
+                <form asp-controller="Contact" asp-action="Index" method="post" class="form-horizontal">
+                    <div asp-validation-summary="ValidationSummary.All" class="text-danger"></div>
+                    <div class="form-group">
+                        <label asp-for="FirstName" class="col-md-2 control-label">First name <span class="text-danger">*</span></label>
+                        <div class="col-md-3">
+                            <input asp-for="FirstName" type="text" class="form-control" />
+                        </div>
+                        <span asp-validation-for="FirstName" class="text-danger col-sm-6"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="LastName" class="col-md-2 control-label">Last name <span class="text-danger">*</span></label>
+                        <div class="col-md-3">
+                            <input asp-for="LastName" type="text" class="form-control" />
+                        </div>
+                        <span asp-validation-for="LastName" class="text-danger help-block"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Email" class="col-md-2 control-label">Email <span class="text-danger">*</span></label>
+                        <div class="col-md-3">
+                            <input asp-for="Email" type="email" class="form-control" />
+                        </div>
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="Message" class="col-md-2 control-label">Message</label>
+                        <div class="col-md-10">
+                            <textarea asp-for="Message" rows="8" cols="70"></textarea>
+                        </div>
+                        <span asp-validation-for="Message" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <button type="submit" class="btn btn-default">Send Message</button>
+                        </div>
+                    </div>
+                </form>
+            </section>
+        </div>
+    </div>
+    <hr>
+</div><!--container end-->

@@ -24,6 +24,16 @@ namespace DepClan.Models
         [Compare("Password", ErrorMessage = "The passwords do not match.")]
         public string ConfirmPassword { get; set; }
 
+        [Required]
+        [StringLength(255, MinimumLength = 3)]
+        public string FirstName { get; set; }
+
+        public string MiddleName { get; set; }
+
+        [Required]
+        [StringLength(255, MinimumLength = 3)]
+        public string LastName { get; set; }
+
         public bool Admin { get; set; }
     }
 }
