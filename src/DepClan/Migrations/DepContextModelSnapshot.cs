@@ -16,7 +16,7 @@ namespace DepClan.Migrations
                 .HasAnnotation("ProductVersion", "7.0.0-rc1-16348")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("DepClan.Models.AppUser", b =>
+            modelBuilder.Entity("DepClan.Models.ApplicationUser", b =>
                 {
                     b.Property<string>("Id");
 
@@ -70,6 +70,29 @@ namespace DepClan.Migrations
                         .HasAnnotation("Relational:Name", "UserNameIndex");
 
                     b.HasAnnotation("Relational:TableName", "AspNetUsers");
+                });
+
+            modelBuilder.Entity("DepClan.Models.Query", b =>
+                {
+                    b.Property<int>("QueryId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Email")
+                        .IsRequired();
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasAnnotation("MaxLength", 255);
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasAnnotation("MaxLength", 255);
+
+                    b.Property<string>("Message")
+                        .IsRequired()
+                        .HasAnnotation("MaxLength", 1024);
+
+                    b.HasKey("QueryId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNet.Identity.EntityFramework.IdentityRole", b =>
@@ -163,14 +186,14 @@ namespace DepClan.Migrations
 
             modelBuilder.Entity("Microsoft.AspNet.Identity.EntityFramework.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("DepClan.Models.AppUser")
+                    b.HasOne("DepClan.Models.ApplicationUser")
                         .WithMany()
                         .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNet.Identity.EntityFramework.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("DepClan.Models.AppUser")
+                    b.HasOne("DepClan.Models.ApplicationUser")
                         .WithMany()
                         .HasForeignKey("UserId");
                 });
@@ -181,7 +204,7 @@ namespace DepClan.Migrations
                         .WithMany()
                         .HasForeignKey("RoleId");
 
-                    b.HasOne("DepClan.Models.AppUser")
+                    b.HasOne("DepClan.Models.ApplicationUser")
                         .WithMany()
                         .HasForeignKey("UserId");
                 });

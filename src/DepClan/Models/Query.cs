@@ -10,6 +10,8 @@ namespace DepClan.Models
     {
         //TODO: make custom error message
 
+        public int QueryId { get; set; }
+
         [Required]
         [StringLength(255, MinimumLength = 3)]
         public string FirstName { get; set; }

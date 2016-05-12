@@ -38,7 +38,7 @@ h4,
 h5,
 h6 {
     text-transform: uppercase;
-    font-family: Roboto,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-family: "Josefin Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
     font-weight: 700;
 }
 
@@ -47,7 +47,7 @@ h6 {
 }
 
 #navbar .nav-links a{
-    font-family:Montserrat;
+    font-family:"Josefin Sans";
     font-size:1.5em;
     color:#90A4AE;
 }

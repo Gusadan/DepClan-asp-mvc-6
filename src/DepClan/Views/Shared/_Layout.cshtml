@@ -51,7 +51,7 @@
                     <li><a asp-controller="Home" asp-action="Index">Home</a></li>
                     <li><a href="#about">Gallery</a></li>
                     <li><a href="#about">3rd Page</a></li>
-                    <li><a href="#about">About</a></li>
+                    <li><a asp-controller="About" asp-action="Index">About</a></li>
                     <li><a asp-controller="Contact" asp-action="Index">Contact</a></li>
                 </ul>
                 @if (User.Identity.IsAuthenticated)
