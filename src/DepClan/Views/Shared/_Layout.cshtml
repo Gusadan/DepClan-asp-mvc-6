@@ -49,7 +49,7 @@
                 <ul class="nav navbar-nav navbar-left nav-links">
                     <li class="hidden"><a href="#page-top"></a></li>
                     <li><a asp-controller="Home" asp-action="Index">Home</a></li>
-                    <li><a href="#about">Gallery</a></li>
+                    <li><a asp-controller="Gallery" asp-action="Index">Gallery</a></li>
                     <li><a href="#about">3rd Page</a></li>
                     <li><a asp-controller="About" asp-action="Index">About</a></li>
                     <li><a asp-controller="Contact" asp-action="Index">Contact</a></li>
@@ -77,15 +77,6 @@
             </div><!--/.navbar-collapse -->
         </div>
     </nav>
-    @if (User.Identity.IsAuthenticated)
-    {
-        <h1>Logged In</h1>
-    }
-    else
-    {
-        <h1>Logged Out</h1>
-
-    }
 
     @RenderBody()
 

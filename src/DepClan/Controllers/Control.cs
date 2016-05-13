@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace DepClan.Controllers
 {
-    public class Admin : Controller
+    public class Control : Controller
     {
-        public IActionResult Index()
+        public IActionResult Admin()
         {
             return View();
         }
