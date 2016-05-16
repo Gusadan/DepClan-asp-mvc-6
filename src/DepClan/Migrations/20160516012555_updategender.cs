@@ -5,7 +5,7 @@ using Microsoft.Data.Entity.Metadata;
 
 namespace DepClan.Migrations
 {
-    public partial class Initial : Migration
+    public partial class updategender : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

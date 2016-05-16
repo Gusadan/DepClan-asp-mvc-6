@@ -8,9 +8,10 @@ using DepClan.Models;
 namespace DepClan.Migrations
 {
     [DbContext(typeof(DepContext))]
-    partial class DepContextModelSnapshot : ModelSnapshot
+    [Migration("20160516013852_wew")]
+    partial class wew
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "7.0.0-rc1-16348")

@@ -8,8 +8,8 @@ using DepClan.Models;
 namespace DepClan.Migrations
 {
     [DbContext(typeof(DepContext))]
-    [Migration("20160512192307_Initial")]
-    partial class Initial
+    [Migration("20160516012555_updategender")]
+    partial class updategender
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

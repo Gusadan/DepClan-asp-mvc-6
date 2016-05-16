@@ -43,6 +43,7 @@ namespace DepClan.Controllers
                     LastName = model.LastName,
                     UserName = model.Email,
                     Email = model.Email,
+                    Gender = model.Gender,
                     Admin = false
                 };
                 var result = await _userManager.CreateAsync(user, model.Password);

@@ -26,163 +26,58 @@
     <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
 
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="~/css/site.css">
+    <link rel="stylesheet" href="~/css/csite.css">
     <script src="~/lib/modernizr/src/Modernizr.js"></script>
 </head>
 <body>
     <!--[if lt IE 8]>
         <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
-    <div class="top-offset"></div>
-    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="#">Project name</a>
-            </div>
-            <div id="navbar" class="navbar-collapse collapse">
-               
-                @if (User.Identity.IsAuthenticated)
-                {
-                    <form asp-controller="Account" asp-action="LogOff" method="post" class="navbar-right">
-                        <ul class="nav navbar-nav navbar-right">
-                            <li>
-                                <a asp-controller="Manage" asp-action="Index" title="Manage">Hello @User.GetUserName()!</a>
-                            </li>
-                            <li>
-                                <button type="submit" class="btn btn-link navbar-btn navbar-link">Log off</button>
-                            </li>
-                        </ul>
-                    </form>
-                }
-                else
-                {
-                    <ul class="nav navbar-nav navbar-right">
-                        <li><a asp-controller="Account" asp-action="Login">Login</a></li>
-                        <li><a asp-controller="Account" asp-action="Register">Register</a></li>
-                    </ul>
-                }
-            </div><!--/.navbar-collapse -->
+    <div id="wrapper">
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+            <ul class="sidebar-nav">
+                <li class="sidebar-brand">
+                    <a asp-controller="Home" asp-action="Index">
+                        Project name
+                    </a>
+                </li>
+                <li>
+                    <a href="#">Dashboard</a>
+                </li>
+                <li>
+                    <a href="#">Shortcuts</a>
+                </li>
+                <li>
+                    <a href="#">Overview</a>
+                </li>
+                <li>
+                    <a href="#">Events</a>
+                </li>
+                <li>
+                    <a href="#">About</a>
+                </li>
+                <li>
+                    <a href="#">Services</a>
+                </li>
+                <li>
+                    <a href="#">Contact</a>
+                </li>
+            </ul>
         </div>
-    </nav>
+        <!-- /#sidebar-wrapper -->
 
-    @RenderBody()
-
-    <footer>
-        <div class="container">
-
-        </div>
-        <div class="sub-footer">
-            <div class="container">
-                <p>&copy; Copyright 2016 mydomain.com all right reserved.</p>
-            </div>
-        </div>
-    </footer>
-
-    <!-- TO SKIP FOR LATER 001
-    <!-- MODAL LOGIN --
-    <div class="modal fade" id="modal-login" tabindex="-1" role="dialog" aria-labelledby="modal-login-label" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">
-                        <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
-                    </button>
-                    <h3 class="modal-title" id="modal-login-label">Login to our site</h3>
-                    <p>Enter your username and password to log on:</p>
-                </div>
-
-                <div class="modal-body">
-
-                    <form asp-controller="Account" asp-action="Login" asp-route-returnurl="@ViewData["ReturnUrl"]" role="form" action="" method="post" class="login-form">
-                        <div asp-validation-summary="ValidationSummary.All" class="text-danger"></div>
-                        <div class="form-group">
-                            <label class="sr-only" for="form-username">Username</label>
-                            <input type="text" name="form-username" placeholder="Username..." class="form-username form-control" id="form-username">
-                        </div>
-                        <div class="form-group">
-                            <label asp-for="Password" class="sr-only" >Password</label>
-                            <input asp-for="Password" type="password" placeholder="Password..." class="form-password form-control" id="form-password">
-                            <span asp-validation-for="Password" class="text-danger"></span>
-                        </div>
-                        <button type="submit" class="btn">Sign in!</button>
-                    </form>
-                    <div id="forgot-password"><a href="#">Forgot password?</a></div>
-                </div>
-
-            </div>
-        </div>
-    </div>
-    <!-- MODAL LOGIN END--
-    -->
-    <!--<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-    <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.2.min.js"><\/script>')</script>
-    <script src="js/vendor/bootstrap.min.js"></script>
-    <script src="js/main.js"></script>-->
-
+        @RenderBody()
+    </div><!-- wrapper -->
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
     <script>
-        $(window).scroll(function () {
-            if ($(document).scrollTop() > 50) {
-                $('nav').addClass('shrink');
-            } else {
-                $('nav').removeClass('shrink');
-            }
+        $("#menu-toggle").click(function(e) {
+            e.preventDefault();
+            $("#wrapper").toggleClass("toggled");
         });
     </script>
 
-    <!-- TO SKIP FOR LATER 001
-    <script>
-
-        jQuery(document).ready(function () {
-
-            /*
-                Fullscreen background
-            */
-            //$.backstretch("assets/img/backgrounds/1.jpg");
-
-            /*
-                Modals
-            */
-            $('.launch-modal').on('click', function (e) {
-                e.preventDefault();
-                $('#' + $(this).data('modal-id')).modal();
-            });
-
-            /*
-                Form validation
-            */
-            $('.login-form input[type="text"], .login-form input[type="password"], .login-form textarea').on('focus', function () {
-                $(this).removeClass('input-error');
-            });
-
-            $('.login-form').on('submit', function (e) {
-
-                $(this).find('input[type="text"], input[type="password"], textarea').each(function () {
-                    if ($(this).val() == "") {
-                        e.preventDefault();
-                        $(this).addClass('input-error');
-                    }
-                    else {
-                        $(this).removeClass('input-error');
-                    }
-                });
-
-            });
-
-
-        });
-
-    </script>
-    TO SKIP FOR LATER 001 END-->
-    <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
 
     @RenderSection("Scripts", false)
 

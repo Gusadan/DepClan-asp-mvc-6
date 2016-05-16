@@ -99,9 +99,15 @@
                 <div class="row">
                     <label class="col-md-12">Gender</label>
                     <fieldset class="form-group col-md-12">
-                        <label class="radio-inline"><input type="radio" name="optradio" />Male</label>
-                        <label class="radio-inline"><input type="radio" name="optradio" />Female</label>
-                        <label class="radio-inline"><input type="radio" name="optradio" />Not Specified</label>
+                        <label asp-for="Gender" class="radio-inline">
+                            <input asp-for="Gender" type="radio" value="Male" />Male
+                        </label>
+                        <label asp-for="Gender" class="radio-inline">
+                            <input asp-for="Gender" type="radio" value="Female"/>Female
+                        </label>
+                        <label asp-for="Gender" class="radio-inline">
+                            <input asp-for="Gender" type="radio" value="NotSpecified" />Not Specified
+                        </label>
                     </fieldset>
                 </div>
 

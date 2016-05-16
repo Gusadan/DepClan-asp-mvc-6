@@ -34,6 +34,9 @@ namespace DepClan.Models
         [StringLength(255, MinimumLength = 3)]
         public string LastName { get; set; }
 
+        public string Gender { get; set; }
+
         public bool Admin { get; set; }
-    }
+
+    }   
 }
