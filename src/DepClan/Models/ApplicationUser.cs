@@ -17,5 +17,7 @@ namespace DepClan.Models
         public string Gender { get; set; }
 
         public bool Admin { get; set; }
+
+        public DateTime JoinDate { get; set; }
     }
 }

@@ -44,7 +44,8 @@ namespace DepClan.Controllers
                     UserName = model.Email,
                     Email = model.Email,
                     Gender = model.Gender,
-                    Admin = false
+                    Admin = false,
+                    JoinDate = DateTime.Now
                 };
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)

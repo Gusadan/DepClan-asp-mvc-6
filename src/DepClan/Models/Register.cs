@@ -38,5 +38,7 @@ namespace DepClan.Models
 
         public bool Admin { get; set; }
 
+        public DateTime JoidDate { get; set; }
+
     }   
 }
