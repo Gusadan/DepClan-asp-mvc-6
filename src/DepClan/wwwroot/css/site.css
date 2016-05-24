@@ -5,6 +5,8 @@
     #bcd5d1
 */
 
+
+
 body {
     overflow-x: hidden;
     font-family:"Josefin Sans";
@@ -90,6 +92,15 @@ footer .sub-footer{
 footer .sub-footer p{
     font-size:1em;
     color:#CFD8DC;
+}
+
+.login-links{
+    font-size: 18px;
+}
+
+.border-top{
+    border-top: 1px solid #C1C1C1;
+    padding-top: 2em;
 }
 
 /***** Modal *****/

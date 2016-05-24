@@ -6,36 +6,35 @@
 }
 <div class="container">
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-4 col-md-offset-4">
             <section>
-                <form asp-controller="Account" asp-action="Login" asp-route-returnurl="@ViewData["ReturnUrl"]" method="post" class="form-horizontal" role="form">
+                <form asp-controller="Account" asp-action="Login" asp-route-returnurl="@ViewData["ReturnUrl"]" method="post" role="form">
                     <div asp-validation-summary="ValidationSummary.All" class="text-danger"></div>
                     <div class="form-group">
-                        <label asp-for="Email" class="col-md-2 control-label"></label>
-                        <div class="col-md-3">
-                            <input asp-for="Email" class="form-control" />
-                            <span asp-validation-for="Email" class="text-danger"></span>
-                        </div>
+                        @*<label asp-for="Email" class="col-md-2 control-label"></label>*@
+                        <input asp-for="Email" class="form-control input-lg" placeholder="Email" />
+                        <span asp-validation-for="Email" class="text-danger"></span>
                     </div>
                     <div class="form-group">
-                        <label asp-for="Password" class="col-md-2 control-label"></label>
-                        <div class="col-md-3">
-                            <input asp-for="Password" class="form-control" />
-                            <span asp-validation-for="Password" class="text-danger"></span>
-                        </div>
+                        @*<label asp-for="Password" class="col-md-2 control-label"></label>*@
+                        <input asp-for="Password" class="form-control input-lg" placeholder="Password" />
+                        <span asp-validation-for="Password" class="text-danger"></span>
                     </div>
 
-                    <div class="form-group">
-                        <div class="col-md-offset-2 col-md-10">
-                            <button type="submit" class="btn btn-default">Log In</button>
-                        </div>
+                    <div class="form-group clearfix">
+                        <button type="submit" class="btn btn-default btn-lg pull-right">Log In</button>
                     </div>
-                    <div class="form-group">
-                        <a href="#" class="col-md-offset-2 col-md-10">No account yet?</a>
-                        <a href="#" class="col-md-offset-2 col-md-10">I forgot password</a>
+
+                    <div class="form-group clearfix login-links">
+                        <a href="#" class="pull-right">I forgot my password</a>
+                    </div>
+                    <hr /><hr /><hr />
+                    <div class="form-group text-center border-top">
+                        <p class="login-links">Not a member yet? <a asp-controller="Account" asp-action="Register" class="login-links">Sign Up</a></p>
                     </div>
                 </form>
             </section>
+            <hr />
         </div>
     </div>
 </div>
