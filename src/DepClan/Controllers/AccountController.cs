@@ -2,6 +2,7 @@
 using Microsoft.AspNet.Mvc;
 using Microsoft.AspNet.Authorization;
 using DepClan.Models;
+using DepClan.ViewModels.Account;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System;
@@ -32,7 +33,7 @@ namespace DepClan.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Register(Register model)
+        public async Task<IActionResult> Register(RegisterViewModel model)
         {
             if (ModelState.IsValid)
             {
@@ -107,6 +108,11 @@ namespace DepClan.Controllers
         {
             await _signInManager.SignOutAsync();
             return RedirectToAction(nameof(HomeController.Index), "Home");
+        }
+
+        public IActionResult EditProfile()
+        {
+            return View();
         }
 
         private IActionResult RedirectToReturnUrl(string returnUrl)
