@@ -35,6 +35,7 @@ namespace DepClan.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Register(RegisterViewModel model)
         {
+            //TODO: Automap viewmodel to model?
             if (ModelState.IsValid)
             {
                 var user = new ApplicationUser
@@ -51,6 +52,7 @@ namespace DepClan.Controllers
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+                    await _userManager.AddToRoleAsync(user, "Member");
                     await _signInManager.SignInAsync(user, isPersistent: false);
                     return RedirectToAction(nameof(HomeController.Index), "Home");
                 }

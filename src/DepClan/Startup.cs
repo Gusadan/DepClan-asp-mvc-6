@@ -12,6 +12,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.PlatformAbstractions;
 using Microsoft.AspNet.Identity.EntityFramework;
 using DepClan.Services;
+using Microsoft.AspNet.Identity;
 
 namespace DepClan
 {
@@ -53,7 +54,7 @@ namespace DepClan
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app)
+        public async void Configure(IApplicationBuilder app, IServiceProvider serviceProvider)
         {
             app.UseStaticFiles();
 
@@ -66,6 +67,29 @@ namespace DepClan
                     template: "{controller}/{action}/{id?}",
                     defaults: new { controller = "Home", action = "Index" });
             });
+
+            await CreateRoles(serviceProvider);
+        }
+
+        private async Task CreateRoles(IServiceProvider serviceProvider)
+        {
+            //reference: https://www.youtube.com/watch?v=JMPSahODM8s
+            var RoleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+            var UserManager = serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
+            string[] roleNames = { "Admin", "Member" };
+            IdentityResult roleResult;
+            foreach (var roleName in roleNames)
+            {
+                var roleExist = await RoleManager.RoleExistsAsync(roleName);
+                if (!roleExist)
+                {
+                    roleResult = await RoleManager.CreateAsync(new IdentityRole(roleName));
+                }
+            }
+
+            //Assign Role to User
+            var user = await UserManager.FindByIdAsync("1e0cd5e3-e1d8-4b3d-8b10-6dbaa9966baf");
+            await UserManager.AddToRoleAsync(user, "Admin");
         }
 
         // Entry point for the application.
