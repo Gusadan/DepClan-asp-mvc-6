@@ -60,6 +60,10 @@
                         <ul class="nav navbar-nav navbar-right">
                             <li>
                                 <a asp-controller="Manage" asp-action="Index" title="Manage">Hello @User.GetUserName()!</a>
+                                @if (User.IsInRole("Admin"))
+                                {
+                                    <a asp-controller="Admin" asp-action="Index">Admin</a>
+                                }
                             </li>
                             <li>
                                 <button type="submit" class="btn btn-link navbar-btn navbar-link">Log off</button>

@@ -1,0 +1,35 @@
+﻿@model DepClan.ViewModels.Admin.AdminUserViewModel
+@using DepClan.Controllers
+@using System.Globalization;
+
+<table>
+    @{
+        var totalUsers = AdminController.usrList.ToList().Count();
+        int num = 0;
+    }
+    <tr>
+        <td colspan="4" style="border-top:none;">Total Users : @totalUsers</td>
+    </tr>
+    <tr>
+        <th class="tblnum"></th>
+        <th>FirstName</th>
+        <th>Rank</th>
+        <th>Edit</th>
+    </tr>
+    @foreach (var usr in AdminController.usrList)
+    {
+        ViewBag.FirstName = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(usr.FirstName);
+        num++;
+        <tr>
+            <td class="tblnum">@num</td>
+            <td>@ViewBag.FirstName</td>
+            <td>@usr.RankName</td>
+            <td>
+                <form asp-controller="Admin" asp-action="EditUser" method="post" class="form-horizontal" role="form">
+                    <input type="hidden" name="id" value="@usr.UserId" />
+                    <input type="submit" class="btn-default btn" value="~" />
+                </form>
+            </td>
+        </tr>
+    }
+</table>
